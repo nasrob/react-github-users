@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Form = (props) => {
 	const [username, setUsername] = useState("");
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		alert(username);
+		axios
+			.get(`https://api.github.com/users/${username}`)
+			.then((response) => {
+				console.log(response.data);
+				setUsername("");
+			});
 	};
 
 	return (
